@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 namespace Self_Version
 {
     internal class Program
@@ -22,13 +19,14 @@ namespace Self_Version
 
         static void Main(string[] args)
         {
+
             //ocultar consola
             var handle = GetConsoleWindow();
             ShowWindow(handle, SW_HIDE);
             try
             {
                 //declaracion de variables
-                string DirFrom = @"E:\extensiones\Ext", DirTo = @"E:\extensiones\Latest", DirPrev = @"E:\extensiones\Previus";
+                string DirFrom = @"\\10.0.40.2\extensiones\Ext", DirTo = @"\\10.0.40.2\extensiones\Latest", DirPrev = @"\\10.0.40.2\extensiones\Previus";
                 List<string> FilesFrom, FilesTo;
 
                 //agarra todas las extensiones
@@ -38,7 +36,7 @@ namespace Self_Version
                 Logic.verifyDirectory(DirFrom);
 
                 //Verificar que la carpeta tenga algo
-                FilesFrom = Logic.verifyFile(DirFrom);
+                FilesFrom = Logic.ExtractFiles(DirFrom);
                 if (!FilesFrom.Any())
                     return;
 
@@ -53,16 +51,23 @@ namespace Self_Version
                         mFile.MoveTo(DirTo + @"\" + mFile.Name);
                 }
 
+                //eliminar los repetidos
+                foreach (FileInfo file in new DirectoryInfo(DirFrom).GetFiles())
+                {
+                    file.Delete();
+                }
+
                 //recibe todo dentro de la lista de latest
-                FilesTo = Logic.verifyFile(DirTo);
+                FilesTo = Logic.ExtractFiles(DirTo);
 
                 //organizar las carpetas posteriores
                 Logic.Organizing(FilesTo, applist, DirTo, DirPrev);
             }
             catch (Exception ex)
             {
-                ShowWindow(handle,SW_SHOW);
-                Console.WriteLine(ex.Message);
+                if (!File.Exists(@"\\10.0.40.2\extensioness\Error.txt"))
+                    File.Create(@"\\10.0.40.2\extensioness\Error.txt");
+                File.AppendAllText(@"\\10.0.40.2\extensioness\Error.txt", ex.Message + Environment.NewLine);
             }
         }
     }
