@@ -44,8 +44,8 @@ namespace Version_Managment
                 log.InfoFormat("Inicio de proceso: {0}", DateTime.Now);
                 //declaracion de variables
                 string DirFrom = path + @"\Ext", DirTo = path + @"\Latest", DirPrev = path + @"\Previus";
-                List<string> FilesFrom, FilesTo;
-
+                List<FileInfo> FilesFrom, FilesTo;
+                
                 //agarra todas las extensiones
                 var applist = Logic.ReadJson(path);
 
@@ -61,11 +61,10 @@ namespace Version_Managment
                 Logic.verifyDirectory(DirTo);
 
                 //ingresa las nuevas extensiones a la carpeta
-                foreach (string File in FilesFrom)
+                foreach (var File in FilesFrom)
                 {
-                    FileInfo mFile = new FileInfo(File);
-                    if (!new FileInfo(DirTo + @"\" + mFile.Name).Exists)
-                        mFile.MoveTo(DirTo + @"\" + mFile.Name);
+                    if (!new FileInfo(DirTo + @"\" + File.Name).Exists)
+                        File.MoveTo(DirTo + @"\" + File.Name);
                 }
 
                 //eliminar los repetidos

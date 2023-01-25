@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 
 namespace Version_Managment
 {
     internal static class Logic
     {
+        static readonly ILog log = LogManager.GetLogger(typeof(Program));
         /// <summary>
         /// lee las configuraciones del json con todas las extensiones que existen
         /// </summary>
@@ -35,9 +37,10 @@ namespace Version_Managment
         /// </summary>
         /// <param name="directory">direccion a extraer archivos</param>
         /// <returns>lista de archivos en el directorio</returns>
-        public static List<string> ExtractFiles(string directory)
+        public static List<FileInfo> ExtractFiles(string directory)
         {
-            return Directory.GetFiles(directory).ToList();
+            var list = Directory.GetFiles(directory).ToList();
+            return (from f in list select new FileInfo(f)).ToList();
         }
         /// <summary>
         /// Funcion  de organizacion de carpetas despues de latest
@@ -46,34 +49,40 @@ namespace Version_Managment
         /// <param name="AllExtensions">lista de extensiones en total</param>
         /// <param name="latestPath">parametro de la carpeta de las ultimas versiones</param>
         /// <param name="PreviusPath">parametro de la carpeta de las versiones previas</param>
-        public static void Organizing(List<string> LatestApps, List<Apps> AllExtensions, string latestPath, string PreviusPath)
+        public static void Organizing(List<FileInfo> LatestApps, List<Apps> AllExtensions, string latestPath, string PreviusPath)
         {
             string tempPath;
 
             foreach (var App in AllExtensions)
             {
                 var TempList = (from apps in LatestApps
-                                where apps.Contains(App.name)
+                                where apps.Name.Contains(App.name)
+                                orderby apps.LastWriteTime descending
                                 select apps).ToList();
 
                 if (TempList.Count <= 1)
                     continue;
 
                 //ordena para que el mas nuevo este primero
-                TempList.Sort();
-                TempList.Reverse();
                 TempList.RemoveAt(0);
 
                 //verifica la creacion de carpetas de versiones previas
-                verifyDirectory(PreviusPath + @"\" + App.name);
                 tempPath = PreviusPath + @"\" + App.name;
+                verifyDirectory(tempPath);
 
                 //itera para poder mover las apps a un carpeta
                 foreach (var app in TempList)
                 {
-                    FileInfo mFile = new FileInfo(app);
-                    if (!new FileInfo(PreviusPath + @"\" + mFile.Name).Exists)
-                        mFile.MoveTo(tempPath + @"\" + mFile.Name);
+                    try
+                    {
+                        if (!new FileInfo(PreviusPath + @"\" + app.Name).Exists)
+                            app.MoveTo(tempPath + @"\" + app.Name);
+                    }
+                    catch (Exception ex)
+                    {
+                        app.Delete();
+                        log.ErrorFormat("Error al mover el archivo: {0}", ex.Message);
+                    }
                 }
             }
         }
