@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dgarz\\source\\repos\\Version-managment\\Version-managment\\Version-managment.csproj": {}
+    "C:\\Users\\dgarz\\OneDrive\\Documentos\\Other Repos\\Self-Version\\Version-managment\\Version-managment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dgarz\\source\\repos\\Version-managment\\Version-managment\\Version-managment.csproj": {
+    "C:\\Users\\dgarz\\OneDrive\\Documentos\\Other Repos\\Self-Version\\Version-managment\\Version-managment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dgarz\\source\\repos\\Version-managment\\Version-managment\\Version-managment.csproj",
+        "projectUniqueName": "C:\\Users\\dgarz\\OneDrive\\Documentos\\Other Repos\\Self-Version\\Version-managment\\Version-managment.csproj",
         "projectName": "Version-managment",
-        "projectPath": "C:\\Users\\dgarz\\source\\repos\\Version-managment\\Version-managment\\Version-managment.csproj",
+        "projectPath": "C:\\Users\\dgarz\\OneDrive\\Documentos\\Other Repos\\Self-Version\\Version-managment\\Version-managment.csproj",
         "packagesPath": "C:\\Users\\dgarz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dgarz\\source\\repos\\Version-managment\\Version-managment\\obj\\",
+        "outputPath": "C:\\Users\\dgarz\\OneDrive\\Documentos\\Other Repos\\Self-Version\\Version-managment\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

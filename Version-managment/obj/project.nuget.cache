@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ilCE8DVOYLOSosXBhDw//jxTo6R1QTZewB39Oc/C8Z6st1VP4kFHHtuM9hhp4dZsaHHNZEltEy+FFdfQfVCYQw==",
+  "dgSpecHash": "4G/fRDts5U53ML3pHTyJ3cQxU6Se5wLYlKOBEoNCmrtDwxM1PkkCzD9ee2nQXqLbhYQcbRl6tUM9cCiCnFfewQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dgarz\\source\\repos\\Version-managment\\Version-managment\\Version-managment.csproj",
+  "projectFilePath": "C:\\Users\\dgarz\\OneDrive\\Documentos\\Other Repos\\Self-Version\\Version-managment\\Version-managment.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dgarz\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\dgarz\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",

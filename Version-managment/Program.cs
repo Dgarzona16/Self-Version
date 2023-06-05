@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Reflection;
+﻿using System.Reflection;
 using log4net;
 using log4net.Config;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using RestSharp;
 
 namespace Version_Managment
 {
@@ -25,7 +18,7 @@ namespace Version_Managment
 
         static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
-        static void Main(string[] args)
+        static void Main()
         {
             try
             {
